@@ -1,0 +1,41 @@
+# Criação e deleção de clusters
+
+## cria cluster simples com um nó
+k3d cluster create 
+
+## cria cluster chamado "meucluster" com 3 servers (control plane) e 3 agents (worker nodes)
+k3d cluster create meucluster --servers 3 --agents 3
+
+## cria vinculando a porta do cluster com a do container
+k3d cluster create meucluster --servers 3 --agents 3 -p "8080:30000@loadbalancer"
+
+## remove o cluster
+k3d cluster delete 
+
+# Visualização dos clusters existentes
+ 
+# Visualização dos nós do cluster
+kubectl get nodes
+
+# Visualização dos pods do cluster
+kubectl get pod
+kubectl get pod -o wide (exibe dados completos do pod)
+
+# Visualização dos replicasets do cluster
+kubectl get replicaset
+
+# Visualização completa
+kubectl get all
+
+# Arquivo de configuração do deployment do kubernetes
+
+## Execução do arquivo manifesto
+kubectl apply -f k8s/deployment.yaml # cria/atualiza o ambiente
+
+## Arquivo manifesto (formato yaml)
+Precisa antes da imagem criada
+
+Estrutura
+-- deployment - gerenciamento do replicaset para troca de versão da aplicação
+---- replicaset - usado para resiliência
+------ pod - unidade básica de execução, onde roda o container

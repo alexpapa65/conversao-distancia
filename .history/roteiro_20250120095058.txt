@@ -1,0 +1,4 @@
+# cria cluster simples com um nó
+k3d cluster create 
+k3d cluster list # mostra os clusters existentes
+kubectl get nodes # lista os nós do cluster kubernetes

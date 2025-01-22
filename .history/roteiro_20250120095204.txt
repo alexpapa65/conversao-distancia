@@ -1,0 +1,9 @@
+# Criação e deleção de clusters
+k3d cluster create # cria cluster simples com um nó
+
+
+# Visualização dos clusters existentes
+k3d cluster list # visão simples
+
+# Visualização dos nós do clusters
+kubectl get nodes # lista os nós do cluster kubernetes

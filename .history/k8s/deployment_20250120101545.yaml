@@ -1,0 +1,32 @@
+apiVersion: apps/v1 # versão da api do kubernetes (procurar deployment em kubectl api-resources)
+kind: Deployment # tipo de recurso que será criado (idem ao anterior)
+metadata:
+  name: conversao-distancia (nome desejado para o deployment)
+spec: # bloco de especificação do deployment
+  replicas: 4 # quantidade de réplicas do pod
+  selector: # seleção dos objetos que terão o mesmo label
+    matchLabels: # label é elemento chave-valor que identifica o pod
+      app: conversao-distancia
+  template: # template do pod
+    metadata: # metadados do pod
+      labels:
+        app: conversao-distancia # precisa ser igual ao label do selector
+    spec: # especificação do pod (executa um ou mais containeres dentro do pod)
+      containers: # lista de containeres
+      - name: conversao-distancia
+        image: papadopoli/conversao-distancia:v1
+        ports: 
+          - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conversao-distancia
+spec:
+  selector:
+    app: conversao-distancia
+  ports:
+  - port: 80
+    targetPort: 5000
+    nodePort: 30000
+  type: NodePort
